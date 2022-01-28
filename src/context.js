@@ -44,16 +44,16 @@ const AppProvider = ({ children }) => {
       payload: id,
     });
   };
-  const handleSearch=(text)=>{
+  const handleSearch=(query)=>{
     dispatch({
         type: HANDLE_SEARCH,
-        payload: text,
+        payload: query,
       });
   }
-  const handlePage=(text)=>{
+  const handlePage=(value)=>{
     dispatch({
         type: HANDLE_PAGE,
-        payload: text,
+        payload: value,
       });
   }
   return (
