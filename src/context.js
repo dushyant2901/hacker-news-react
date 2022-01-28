@@ -12,7 +12,8 @@ const initialState = {
   isLoading: false,
   hits: [],
   page: 0,
-  query:'react'
+  query:'react',
+  nbPages:0
 };
 const API_ENDPOINT = "https://hn.algolia.com/api/v1/search?";
 const AppContext = createContext();
@@ -27,7 +28,7 @@ const AppProvider = ({ children }) => {
       console.log(data);
       dispatch({
         type: SET_STORIES,
-        payload: { hits: data.hits, page: data.page },
+        payload: { hits: data.hits, page: data.page ,nbPages: data.nbPages},
       });
     } catch (error) {
       console.log(error);
@@ -49,9 +50,14 @@ const AppProvider = ({ children }) => {
         payload: text,
       });
   }
-
+  const handlePage=(text)=>{
+    dispatch({
+        type: HANDLE_PAGE,
+        payload: text,
+      });
+  }
   return (
-    <AppContext.Provider value={{ ...state ,removeStory,handleSearch}}>{children}</AppContext.Provider>
+    <AppContext.Provider value={{ ...state ,removeStory,handleSearch,handlePage}}>{children}</AppContext.Provider>
   );
 };
 export const useGlobalContext = () => useContext(AppContext);
